@@ -7,6 +7,8 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const connectDB = require("./config/db");
 const authRoute = require("./routes/authRoutes");
+const movieRoute = require("./routes/movieRoutes");
+const favoriteRoute = require("./routes/favoriteRoutes");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -28,6 +30,9 @@ app.get("/", (req, res) => {
   res.send("CineCraze backend running");
 });
 app.use("/api/auth", authRoute);
+app.use("/api/movies", movieRoute);
+app.use("/api/favorites", favoriteRoute);
+
 connectDB();
 
 // Only start server if not in test environment
