@@ -7,6 +7,7 @@ describe("Auth API", () => {
   let authToken;
 
   beforeAll(async () => {
+    // ONLY USING TEST DB not production one
     await mongoose.connect(process.env.TEST_MONGODB_URI);
     await User.deleteMany({});
   });

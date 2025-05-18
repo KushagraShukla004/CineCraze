@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { hash, compare } =  require("bcryptjs");
+const { hash, compare } = require("bcryptjs");
 const validator = require("validator");
 
 const userSchema = new Schema(
@@ -22,10 +22,6 @@ const userSchema = new Schema(
       minlength: 8,
       //to not be selected by default whenever user model is called
       select: false,
-    },
-    avatar: {
-      type: String,
-      default: "",
     },
     role: { type: String, enum: ["user", "admin"], default: "user" },
   },
