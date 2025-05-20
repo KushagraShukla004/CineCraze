@@ -171,10 +171,11 @@
   }
 }
 
-@layer utilities {
-}
-
 @layer components {
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
   .movie-card {
     @apply relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl;
   }
