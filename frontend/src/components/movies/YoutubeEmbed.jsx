@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { Play, Pause, X, Maximize, Minimize, Volume2, VolumeX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const YouTubeEmbed = ({ videoId, title, onClose, autoplay = false }) => {
+const YoutubeEmbed = ({ videoId, title, onClose, autoplay = false }) => {
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -166,4 +166,4 @@ const YouTubeEmbed = ({ videoId, title, onClose, autoplay = false }) => {
   );
 };
 
-export default YouTubeEmbed;
+export default YoutubeEmbed;

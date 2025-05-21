@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LoadingScreen from "@/components/ui/LoadingScreen";
-import YouTubeEmbed from "@/components/movies/YouTubeEmbed";
+import YoutubeEmbed from "@/components/movies/YoutubeEmbed";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -506,7 +506,7 @@ const MovieDetailPage = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               className="relative w-full max-w-4xl"
             >
-              <YouTubeEmbed
+              <YoutubeEmbed
                 videoId={trailerVideoId}
                 title={`${movie.title} - Trailer`}
                 onClose={() => setShowTrailer(false)}
