@@ -5,9 +5,15 @@ import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
+import { transformMovieData } from "@/lib/utils";
 
-const MovieSection = ({ title, movies, isLoading, viewAllLink }) => {
+const MovieSection = ({ title, movies, isLoading, viewAllLink, favorites }) => {
   const [visibleMovies, setVisibleMovies] = useState([]);
+
+  // Check if a movie is in favorites
+  const isFavorite = (movieId) => {
+    return favorites?.some((fav) => fav.id === movieId);
+  };
 
   // Show movies with a staggered animation
   useEffect(() => {
@@ -59,7 +65,10 @@ const MovieSection = ({ title, movies, isLoading, viewAllLink }) => {
               : // Movie Cards
                 visibleMovies.map((movie, index) => (
                   <div key={movie.id} className="w-[200px] flex-none">
-                    <MovieCard movie={movie} />
+                    <MovieCard
+                      movie={transformMovieData(movie)}
+                      isFavorite={isFavorite(movie.id)}
+                    />
                   </div>
                 ))}
           </div>

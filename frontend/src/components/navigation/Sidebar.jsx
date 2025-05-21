@@ -56,7 +56,14 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
       <nav className="flex-1 space-y-1 px-2 py-4">
         <NavLink
           to="/"
-          className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
+          className={({ isActive }) =>
+            `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
+            ${
+              isActive
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "hover:bg-accent hover:text-accent-foreground"
+            }`
+          }
         >
           <Home size={18} />
           <span>Home</span>
@@ -64,7 +71,14 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
 
         <NavLink
           to="/movies"
-          className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
+          className={({ isActive }) =>
+            `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
+            ${
+              isActive
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "hover:bg-accent hover:text-accent-foreground"
+            }`
+          }
         >
           <Film size={18} />
           <span>Movies</span>
@@ -73,7 +87,12 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
         <NavLink
           to="/movies?filter=trending"
           className={({ isActive, isPending }) =>
-            `sidebar-link ${isActive ? "active" : ""}`
+            `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
+            ${
+              isActive
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "hover:bg-accent hover:text-accent-foreground"
+            }`
           }
         >
           <Flame size={18} />
@@ -83,7 +102,14 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
         {isLoggedIn && (
           <NavLink
             to="/favorites"
-            className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
+              ${
+                isActive
+                  ? "bg-primary text-primary-foreground shadow-md"
+                  : "hover:bg-accent hover:text-accent-foreground"
+              }`
+            }
           >
             <Heart size={18} />
             <span>Favorites</span>

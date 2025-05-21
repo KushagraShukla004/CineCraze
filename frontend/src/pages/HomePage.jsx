@@ -10,6 +10,7 @@ import LoadingScreen from "@/components/ui/LoadingScreen";
 const HomePage = () => {
   const dispatch = useDispatch();
   const { trendingMovies, popularMovies } = useSelector((state) => state.movies);
+  const { favorites } = useSelector((state) => state.favorites);
 
   useEffect(() => {
     dispatch(fetchTrendingMovies());
@@ -40,6 +41,7 @@ const HomePage = () => {
         movies={trendingMovies.results}
         isLoading={trendingMovies.isLoading}
         viewAllLink="/movies?filter=trending"
+        favorites={favorites} // Changed from isFavorite to favorites
       />
 
       {/* Popular Movies Section */}
@@ -48,6 +50,7 @@ const HomePage = () => {
         movies={popularMovies.results}
         isLoading={popularMovies.isLoading}
         viewAllLink="/movies?sort=popularity.desc"
+        favorites={favorites}
       />
     </motion.div>
   );

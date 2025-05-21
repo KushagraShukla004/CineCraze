@@ -21,7 +21,7 @@ const HeroSection = ({ movie }) => {
         )}
 
         <img
-          src={movie.poster || "/placeholder.svg"}
+          src={movie.backdrop || "/placeholder.svg"}
           alt={movie.title}
           className="h-full w-full object-cover opacity-80"
           onLoad={() => setImageLoaded(true)}
@@ -60,7 +60,7 @@ const HeroSection = ({ movie }) => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col justify-center"
           >
-            <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+            <h1 className="mb-2 text-3xl font-heading font-bold md:text-4xl lg:text-5xl">
               {movie.title}
             </h1>
 
@@ -70,15 +70,17 @@ const HeroSection = ({ movie }) => {
                 <span className="font-medium">{movie.rating.toFixed(1)}</span>
               </div>
 
-              <span className="text-muted-foreground">{movie.releaseYear}</span>
+              <span className="text-muted-foreground font-medium">
+                {movie.releaseYear}
+              </span>
             </div>
 
-            <p className="mb-6 line-clamp-3 text-muted-foreground md:line-clamp-4">
-              {movie.synopsis || "No synopsis available."}
+            <p className="mb-6 line-clamp-3 text-muted-foreground md:line-clamp-4 text-lg">
+              {movie.overview || "No synopsis available."}
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="rounded-full shadow-lg">
                 <Link to={`/movies/${movie.id}`}>
                   <Play className="mr-2 h-5 w-5" />
                   View Details

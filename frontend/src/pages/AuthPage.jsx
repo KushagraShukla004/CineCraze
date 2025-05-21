@@ -13,7 +13,6 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState("login");
-  console.log("activeTab: ", activeTab);
 
   // If user is already logged in, redirect to home or the page they were trying to access
   useEffect(() => {
@@ -117,7 +116,7 @@ const AuthPage = () => {
             <p className="mt-2 text-muted-foreground">Your ultimate movie companion</p>
           </div>
 
-          <div className="bg-card shadow-lg rounded-xl p-8 border border-muted">
+          <div className="bg-card shadow-lg rounded-2xl p-8 border border-muted">
             <Tabs
               defaultValue="login"
               value={activeTab}
@@ -138,7 +137,7 @@ const AuthPage = () => {
                     exit={{ opacity: 0, x: activeTab === "login" ? 20 : -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                <Login switchToRegister={() => setActiveTab("register")} />
+                    <Login switchToRegister={() => setActiveTab("register")} />
                   </motion.div>
                 </AnimatePresence>
               </TabsContent>

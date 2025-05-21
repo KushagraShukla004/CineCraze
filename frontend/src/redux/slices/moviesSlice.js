@@ -6,7 +6,37 @@ export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async (params, { rejectWithValue }) => {
     try {
-      const response = await moviesApi.getAll(params);
+      // Extract and format parameters
+      const {
+        page = 1,
+        search,
+        genre,
+        minYear,
+        maxYear,
+        minRating,
+        maxRating,
+        sort,
+      } = params || {};
+
+      // Prepare query parameters
+      const queryParams = { page };
+
+      // Handle special case for trending
+      if (sort === "trending") {
+        const response = await moviesApi.getTrending({ page });
+        return response.data;
+      }
+
+      // Add search and filters
+      if (search) queryParams.search = search;
+      if (genre) queryParams.genre = genre;
+      if (minYear) queryParams.minYear = minYear;
+      if (maxYear) queryParams.maxYear = maxYear;
+      if (minRating) queryParams.minRating = minRating;
+      if (maxRating) queryParams.maxRating = maxRating;
+      if (sort && sort !== "trending") queryParams.sort = sort;
+
+      const response = await moviesApi.getAll(queryParams);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch movies");
@@ -68,11 +98,13 @@ const initialState = {
     results: [],
     isLoading: false,
     error: null,
+    timeWindow: null, // Add timeWindow for trending movies
   },
   trendingMovies: {
     results: [],
     isLoading: false,
     error: null,
+    timeWindow: null, // Add timeWindow for trending movies
   },
   movieDetails: {
     movie: null,
@@ -141,6 +173,7 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchTrendingMovies.fulfilled, (state, action) => {
         state.trendingMovies.results = action.payload.results;
+        state.trendingMovies.timeWindow = action.payload.timeWindow;
         state.trendingMovies.isLoading = false;
       })
       .addCase(fetchTrendingMovies.rejected, (state, action) => {

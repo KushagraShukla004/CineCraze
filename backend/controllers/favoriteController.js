@@ -3,7 +3,7 @@ const Favorite = require("../models/Favorite");
 //1. Add movie to favorites
 const addFavorite = async (req, res) => {
   try {
-    const { movieId, title, posterPath, releaseDate, rating } = req.body;
+    const { movieId, title, poster, releaseYear, rating, genres, overview } = req.body;
 
     // Check if already favorited
     const existingFavorite = await Favorite.findOne({
@@ -22,9 +22,11 @@ const addFavorite = async (req, res) => {
       user: req.user.id,
       movieId,
       title,
-      posterPath,
-      releaseDate,
+      poster,
+      releaseYear,
       rating,
+      genres,
+      overview,
     });
 
     res.status(201).json({

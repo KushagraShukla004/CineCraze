@@ -15,9 +15,11 @@ const favoriteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    posterPath: String,
+    poster: String,
     releaseYear: String,
     rating: Number,
+    genres: [Number],
+    overview: String,
   },
   {
     timestamps: true,

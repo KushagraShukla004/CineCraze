@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { moviesApi } from "@/lib/api";
 
-// Async thunks
 export const fetchGenres = createAsyncThunk(
   "genres/fetchGenres",
   async (_, { rejectWithValue }) => {

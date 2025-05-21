@@ -148,12 +148,16 @@ const getTrendingMovies = async (req, res) => {
     const results = data.results.map((m) => ({
       id: m.id,
       title: m.title,
+      overview: m.overview,
+      genres: m.genre_ids,
+      backdrop: m.backdrop_path
+        ? `https://image.tmdb.org/t/p/original${m.backdrop_path}`
+        : null,
       poster: m.poster_path
         ? `https://image.tmdb.org/t/p/original${m.poster_path}`
         : null,
       releaseYear: m.release_date ? m.release_date.split("-")[0] : "N/A",
       rating: m.vote_average,
-      trendingScore: m.popularity,
     }));
 
     const responseData = {
@@ -186,11 +190,14 @@ const getPopularMovies = async (req, res) => {
     const results = data.results.map((m) => ({
       id: m.id,
       title: m.title,
+      genres: m.genre_ids,
+      overview: m.overview,
       poster: m.poster_path
         ? `https://image.tmdb.org/t/p/original${m.poster_path}`
         : null,
       releaseYear: m.release_date ? m.release_date.split("-")[0] : "N/A",
       rating: m.vote_average,
+      popularityScore: m.popularity,
     }));
 
     const responseData = {
@@ -257,8 +264,11 @@ const getMovieDetails = async (req, res) => {
       genres: data.genres.map((g) => g.name),
       rating: data.vote_average,
       releaseDate: data.release_date,
-      poster: m.poster_path
-        ? `https://image.tmdb.org/t/p/original${m.poster_path}`
+      backdrop: data.backdrop_path
+        ? `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+        : null,
+      poster: data.poster_path
+        ? `https://image.tmdb.org/t/p/original${data.poster_path}`
         : null,
       trailers,
       cast,

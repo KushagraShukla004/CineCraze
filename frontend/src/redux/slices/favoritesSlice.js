@@ -23,9 +23,11 @@ export const addFavorite = createAsyncThunk(
       const movieData = {
         movieId: movie.id,
         title: movie.title,
-        posterPath: movie.poster,
-        releaseDate: movie.releaseYear,
-        rating: movie.rating,
+        poster: movie.poster || movie.posterPath || "",
+        releaseYear: movie.releaseYear || movie.releaseDate?.split("-")[0] || "",
+        rating: movie.rating || 0,
+        genres: movie.genres || [],
+        overview: movie.overview || "",
       };
 
       const response = await favoritesApi.add(movieData);
@@ -75,10 +77,12 @@ const favoritesSlice = createSlice({
         state.favorites = action.payload.map((fav) => ({
           id: fav.movieId,
           title: fav.title,
-          poster: fav.posterPath,
-          releaseYear: fav.releaseDate,
+          poster: fav.poster,
+          releaseYear: fav.releaseYear,
           rating: fav.rating,
           dbId: fav._id,
+          genres: fav.genres || [],
+          overview: fav.overview || "",
         }));
         state.isLoading = false;
       })

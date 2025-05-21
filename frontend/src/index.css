@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
@@ -32,127 +32,132 @@
 }
 
 :root {
-  --font-quicksand: "Quicksand", system-ui, sans-serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: #0a0a0f;
-  --foreground: #e0e0ff;
+  /* Vibrant Neon Theme */
+  --background: #0f0f1a;
+  --foreground: #f0f0ff;
 
-  --card: #15151f;
-  --card-foreground: #e0e0ff;
+  --card: #1a1a2e;
+  --card-foreground: #f0f0ff;
 
-  --primary: #00f3ff;
-  --primary-foreground: #0a0a0f;
+  --primary: #7f5af0;
+  --primary-foreground: #ffffff;
 
-  --secondary: #ff2d55;
+  --secondary: #2cb67d;
   --secondary-foreground: #ffffff;
 
-  --accent: #e1462f;
-  --accent-foreground: #ffffff;
+  --accent: #ff8906;
+  --accent-foreground: #0f0f1a;
 
-  --muted: #252535;
-  --muted-foreground: #9090a0;
+  --muted: #2a2a3d;
+  --muted-foreground: #a0a0c0;
 
-  --destructive: #ff1744;
+  --destructive: #ff5470;
   --destructive-foreground: #ffffff;
 
-  --border: #252535;
-  --input: #252535;
-  --ring: #00f3ff;
+  --border: #2a2a3d;
+  --input: #2a2a3d;
+  --ring: #7f5af0;
 }
 
 .light {
-  --background: #fafcff;
-  --foreground: #0a0f29;
+  /* Soft Pastel Theme */
+  --background: #f8f9fc;
+  --foreground: #1c1c28;
 
   --card: #ffffff;
-  --card-foreground: #0a0f29;
+  --card-foreground: #1c1c28;
 
   --popover: #ffffff;
-  --popover-foreground: #0a0f29;
+  --popover-foreground: #1c1c28;
 
-  --primary: #0090ed;
-  --primary-foreground: #fafcff;
+  --primary: #6246ea;
+  --primary-foreground: #ffffff;
 
-  --secondary: #ff8534;
-  --secondary-foreground: #fafcff;
+  --secondary: #e45858;
+  --secondary-foreground: #ffffff;
 
-  --muted: #f1f5fe;
-  --muted-foreground: #646b82;
+  --muted: #f1f3f9;
+  --muted-foreground: #6e7191;
 
-  --accent: #f1f5fe;
-  --accent-foreground: #1c2439;
+  --accent: #f582ae;
+  --accent-foreground: #1c1c28;
 
-  --destructive: #ef4444;
-  --destructive-foreground: #fafcff;
+  --destructive: #e45858;
+  --destructive-foreground: #ffffff;
 
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #0a0f29;
+  --ring: #6246ea;
 
   --radius: 0.5rem;
 }
 
 .royal {
-  --background: #0a0a1a;
-  --foreground: #f0f0ff;
+  /* Cosmic Royal Theme */
+  --background: #10002b;
+  --foreground: #e0e0ff;
 
-  --card: #15152a;
-  --card-foreground: #f0f0ff;
+  --card: #240046;
+  --card-foreground: #e0e0ff;
 
-  --popover: #0a0a1a;
-  --popover-foreground: #f0f0ff;
+  --popover: #10002b;
+  --popover-foreground: #e0e0ff;
 
-  --primary: #6a5acd;
+  --primary: #9d4edd;
   --primary-foreground: #ffffff;
 
-  --secondary: #9370db;
-  --secondary-foreground: #000000;
+  --secondary: #c77dff;
+  --secondary-foreground: #10002b;
 
-  --muted: #252540;
-  --muted-foreground: #a0a0c0;
+  --muted: #3c096c;
+  --muted-foreground: #b8b8ff;
 
-  --accent: #483d8b;
-  --accent-foreground: #f0f0ff;
+  --accent: #ff9e00;
+  --accent-foreground: #10002b;
 
-  --destructive: #8b0000;
-  --destructive-foreground: #f0f0ff;
+  --destructive: #ff5a5f;
+  --destructive-foreground: #ffffff;
 
-  --border: #252540;
-  --input: #252540;
-  --ring: #6a5acd;
+  --border: #3c096c;
+  --input: #3c096c;
+  --ring: #9d4edd;
 }
 
 .emerald {
-  --background: #213947;
-  --foreground: #e0f7fa;
+  /* Ocean Breeze Theme */
+  --background: #004e64;
+  --foreground: #f0f4f8;
 
-  --card: #2a4758;
-  --card-foreground: #e0f7fa;
+  --card: #006778;
+  --card-foreground: #f0f4f8;
 
-  --popover: #213947;
-  --popover-foreground: #e0f7fa;
+  --popover: #004e64;
+  --popover-foreground: #f0f4f8;
 
-  --primary: #41c791;
-  --primary-foreground: #213947;
+  --primary: #00b4d8;
+  --primary-foreground: #004e64;
 
-  --secondary: #38b2ac;
-  --secondary-foreground: #e0f7fa;
+  --secondary: #f0c808;
+  --secondary-foreground: #004e64;
 
-  --muted: #325261;
-  --muted-foreground: #a0bcc5;
+  --muted: #00778a;
+  --muted-foreground: #a5d8e6;
 
-  --accent: #319795;
-  --accent-foreground: #e0f7fa;
+  --accent: #f0c808;
+  --accent-foreground: #004e64;
 
-  --destructive: #e53e3e;
-  --destructive-foreground: #e0f7fa;
+  --destructive: #ef476f;
+  --destructive-foreground: #f0f4f8;
 
-  --border: #325261;
-  --input: #325261;
-  --ring: #41c791;
+  --border: #00778a;
+  --input: #00778a;
+  --ring: #00b4d8;
 }
 
 @layer base {
@@ -166,8 +171,17 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     transition: var(--theme-transition);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-semibold;
   }
 }
 
@@ -177,15 +191,15 @@
     background-clip: text;
   }
   .movie-card {
-    @apply relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl;
+    @apply relative overflow-hidden rounded-lg transition-all duration-300;
   }
 
   .movie-card-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100;
+    @apply absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100;
   }
 
   .movie-card-content {
-    @apply absolute bottom-0 w-full p-4 transform translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100;
+    @apply absolute bottom-0 w-full p-4 transform translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 z-10;
   }
 
   .movie-rating {
@@ -238,5 +252,23 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* New styles for filter tags */
+  .filter-tag {
+    @apply inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary;
+  }
+
+  /* Improved movie details page styles */
+  .movie-detail-section {
+    @apply space-y-4 rounded-lg border p-4;
+  }
+
+  .movie-cast-card {
+    @apply flex items-center gap-3 rounded-md border p-3 transition-colors hover:bg-accent/50;
+  }
+
+  .movie-trailer-card {
+    @apply flex items-center gap-2 rounded-md border p-3 transition-colors hover:bg-accent;
   }
 }

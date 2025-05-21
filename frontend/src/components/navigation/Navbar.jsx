@@ -26,7 +26,7 @@ const Navbar = ({ isLoggedIn, sidebarOpen, setSidebarOpen }) => {
     }
   }, [location.search]);
 
-  // Update URL when search query changes 
+  // Update URL when search query changes
   useEffect(() => {
     if (debouncedSearchQuery && debouncedSearchQuery.trim() !== "") {
       navigate(`/movies?search=${encodeURIComponent(debouncedSearchQuery)}`, {
@@ -94,7 +94,7 @@ const Navbar = ({ isLoggedIn, sidebarOpen, setSidebarOpen }) => {
             <Button
               variant="outline"
               size="lg"
-              className="text-muted-foreground"
+              className="text-muted-foreground rounded-full"
               onClick={() => setIsSearching(true)}
             >
               <Search size={16} className="mr-2" />
@@ -102,7 +102,7 @@ const Navbar = ({ isLoggedIn, sidebarOpen, setSidebarOpen }) => {
             </Button>
           )}
         </div>
-        
+
         {/* Right Side - Theme & User */}
         <div className="flex items-center gap-4">
           <ThemeSwitcher />
