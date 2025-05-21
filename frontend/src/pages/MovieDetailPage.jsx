@@ -6,7 +6,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { fetchMovieDetails } from "@/redux/slices/moviesSlice";
 import { addFavorite, removeFavorite } from "@/redux/slices/favoritesSlice";
 import { useToast } from "@/hooks/use-toast";
-import { transformMovieData } from "@/lib/utils";
 import {
   Star,
   Calendar,
@@ -21,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LoadingScreen from "@/components/ui/LoadingScreen";
-import YouTubeEmbed from "@/components/movies/YouTubeEmbed";
+import YouTubeEmbed from "../components/movies/YouTubeEmbed";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -85,7 +84,8 @@ const MovieDetailPage = () => {
       // Ensure we're sending genre IDs (numbers) not names
       const favoriteData = {
         ...movieDetails.movie,
-        genres: movieDetails.movie.genre_ids || movieDetails.movie.genres.map(g => g.id)
+        genres:
+          movieDetails.movie.genre_ids || movieDetails.movie.genres.map((g) => g.id),
       };
       dispatch(addFavorite(favoriteData));
       toast({
