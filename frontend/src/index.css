@@ -157,8 +157,8 @@
 
 @layer base {
   :root {
-    --theme-transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
-      color 0.3s ease-in-out;
+    --theme-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+      color 0.15s ease-in-out;
   }
 
   * {
