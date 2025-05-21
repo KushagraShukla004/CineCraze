@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LoadingScreen from "@/components/ui/LoadingScreen";
-import YouTubeEmbed from "../components/movies/YouTubeEmbed";
+import YouTubeEmbed from "@/components/movies/YouTubeEmbed";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
