@@ -9,8 +9,12 @@
     "test": "jest",
     "build": "npm install"
   },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Kushagra Shukla",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
