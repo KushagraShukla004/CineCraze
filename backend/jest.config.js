@@ -6,6 +6,10 @@ module.exports = {
   clearMocks: true,
   testTimeout: 30000,
   collectCoverage: true,
-  coverageDirectory: "coverage",
-  coveragePathIgnorePatterns: ["/node_modules/", "/tests/", "/coverage/"],
+  coverageDirectory: './coverage',
+  coverageReporters: ['lcov', 'text', 'html'],
+  reporters: [
+    'default',
+    ['jest-junit', { outputDirectory: './test-results', outputName: 'junit.xml' }]
+  ]
 };

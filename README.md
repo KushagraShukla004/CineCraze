@@ -125,3 +125,5 @@ Deploy to services like Render or Railway with proper environment variables set.
 ## License
 
 MIT
+
+![Tests](https://github.com/yourusername/CineCraze/actions/workflows/tests.yml/badge.svg)
