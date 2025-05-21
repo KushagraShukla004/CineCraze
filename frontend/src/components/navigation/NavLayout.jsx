@@ -11,7 +11,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const NavLayout = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
 
   // Close sidebar when changing routes on mobile

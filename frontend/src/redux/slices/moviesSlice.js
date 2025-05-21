@@ -15,28 +15,28 @@ export const fetchMovies = createAsyncThunk(
 );
 
 export const fetchPopularMovies = createAsyncThunk(
-  "movies/fetchPopularMovies",
-  async (params, { rejectWithValue }) => {
+  "movies/fetchPopular",
+  async ({ page = 1 } = {}, { rejectWithValue }) => {
     try {
-      const response = await moviesApi.getPopular(params);
+      const response = await moviesApi.getPopular({ page });
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch popular movies"
+        error.response?.data || { message: "Failed to fetch popular movies" }
       );
     }
   }
 );
 
 export const fetchTrendingMovies = createAsyncThunk(
-  "movies/fetchTrendingMovies",
-  async (params, { rejectWithValue }) => {
+  "movies/fetchTrending",
+  async ({ page = 1 } = {}, { rejectWithValue }) => {
     try {
-      const response = await moviesApi.getTrending(params);
+      const response = await moviesApi.getTrending({ page });
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch trending movies"
+        error.response?.data || { message: "Failed to fetch trending movies" }
       );
     }
   }
