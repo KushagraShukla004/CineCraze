@@ -13,7 +13,14 @@ const favoriteRoute = require("./routes/favoriteRoutes");
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(cors());
+// CORS configuration
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://cine-craze-zeta.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(json());
 
 // Logging HTTP requests in "dev mode"
