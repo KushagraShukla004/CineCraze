@@ -6,13 +6,18 @@ CineCraze is a comprehensive movie browsing web application that enables users t
 
 ## Features
 
-- **User Authentication**: Signup, login, and logout functionality
-- **Movie Browsing**: Browse popular, top-rated, and upcoming movies
-- **Search & Filtering**: Search by title with debouncing, filter by genre/year/rating
-- **Favorites Management**: Save/remove favorite movies with localStorage persistence
-- **Dark Mode**: Theme toggle with persistent user preference
-- **Infinite Scrolling**: Manual implementation for movie listings
-- **Detailed Movie Pages**: Comprehensive movie information with lazy loading
+- ✨ Modern UI/UX with responsive design and dark mode support
+- 🔐 User Authentication (Login/Signup/Logout)
+- 🔍 Live Search with debouncing
+- ⚿ Advanced Filtering by genre, year range, and ratings
+- ↗️ Infinite Scrolling for a seamless browsing experience
+- ❤️ Favorites Management stored with persistence
+- 📈 Detailed Movie Info with cast, genres, ratings, and synopsis
+- 🚗 Scroll Position Restore on back navigation
+- ⚡ Performance Optimizations with lazy loading, memoization, and code splitting
+- ✨ Animations for smoother interactions
+- ⚠ Robust Error Handling with error boundaries and logging
+- ✅ Unit & Integration Testing with Jest/React Testing Library
 
 ## Tech Stack
 
