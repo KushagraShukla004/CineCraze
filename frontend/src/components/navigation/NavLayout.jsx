@@ -36,7 +36,7 @@ const NavLayout = () => {
               initial={{ x: -280, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -280, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className={`${
                 isMobile ? "fixed inset-y-0 left-0 z-50" : "sticky top-0 h-screen"
               }`}

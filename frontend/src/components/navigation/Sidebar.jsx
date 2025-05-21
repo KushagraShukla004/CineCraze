@@ -30,11 +30,11 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
   };
 
   return (
-    <div className="flex h-full w-64 flex-col border-r bg-card relative">
+    <div className="flex h-full w-64 flex-col bg-card/80 backdrop-blur-lg relative">
       {/* Mobile close button (X) */}
       <button
         onClick={() => setSidebarOpen?.(false)}
-        className="absolute right-2 top-4 p-2 rounded-full hover:bg-accent block md:hidden"
+        className="absolute right-2 top-4 p-2 rounded-full hover:bg-muted/50 transition-colors block md:hidden"
       >
         <X size={20} />
       </button>
@@ -43,7 +43,7 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setSidebarOpen(false)}
-        className="p-1 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-200 absolute right-2 top-4 hidden md:block"
+        className="p-2 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-200 absolute right-2 top-4 hidden md:block"
       >
         <ChevronLeft size={18} />
       </motion.button>
@@ -57,12 +57,12 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
-            ${
-              isActive
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-accent hover:text-accent-foreground"
-            }`
+            `flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 
+    ${
+      isActive
+        ? "bg-primary text-primary-foreground shadow-md"
+        : "hover:bg-muted/50 hover:text-foreground"
+    }`
           }
         >
           <Home size={18} />
@@ -72,11 +72,12 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
         <NavLink
           to="/movies"
           className={({ isActive }) =>
-            `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
+            `flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 
             ${
-              isActive
+              //searches for exact path and ensures it only activates when there are no query parameters
+              isActive && window.location.search === ""
                 ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-accent hover:text-accent-foreground"
+                : "hover:bg-muted/50 hover:text-foreground"
             }`
           }
         >
@@ -84,30 +85,15 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
           <span>Movies</span>
         </NavLink>
 
-        <NavLink
-          to="/movies?filter=trending"
-          className={({ isActive, isPending }) =>
-            `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
-            ${
-              isActive
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-accent hover:text-accent-foreground"
-            }`
-          }
-        >
-          <Flame size={18} />
-          <span>Trending</span>
-        </NavLink>
-
         {isLoggedIn && (
           <NavLink
             to="/favorites"
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors 
+              `flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 
               ${
                 isActive
                   ? "bg-primary text-primary-foreground shadow-md"
-                  : "hover:bg-accent hover:text-accent-foreground"
+                  : "hover:bg-muted/50 hover:text-foreground"
               }`
             }
           >
@@ -124,7 +110,7 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleLogout}
-            className="sidebar-link w-full justify-start text-red-400 hover:bg-destructive/50"
+            className="flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium w-full justify-start text-red-400 hover:bg-destructive/20 transition-all duration-200"
           >
             <LogOut size={18} />
             <span>Logout</span>
@@ -133,7 +119,14 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
           <div className="space-y-1">
             <NavLink
               to="/auth"
-              className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 
+                ${
+                  isActive
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "hover:bg-muted/50 hover:text-foreground"
+                }`
+              }
             >
               <LogIn size={18} />
               <span>Login</span>
@@ -141,7 +134,14 @@ const Sidebar = ({ isLoggedIn, setSidebarOpen }) => {
 
             <NavLink
               to="/auth?tab=register"
-              className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 
+                ${
+                  isActive
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "hover:bg-muted/50 hover:text-foreground"
+                }`
+              }
             >
               <UserPlus size={18} />
               <span>Register</span>

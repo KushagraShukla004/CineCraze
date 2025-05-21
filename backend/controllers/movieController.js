@@ -45,7 +45,25 @@ const getAllMovies = async (req, res) => {
       page = 1,
     } = req.query;
 
-    // Validate ratings (range 0–10)
+    // Generate cache key based on query parameters
+    const cacheKey = generateCacheKey("all", {
+      search,
+      genre,
+      minYear,
+      maxYear,
+      minRating,
+      maxRating,
+      sort,
+      page
+    });
+
+    // Check for cached data
+    const cachedData = await getCachedData(cacheKey);
+    if (cachedData) {
+      return res.json({ success: true, cached: true, ...cachedData });
+    }
+
+    // Validate ratings and year range
     if (
       (minRating && (minRating < 0 || minRating > 10)) ||
       (maxRating && (maxRating < 0 || maxRating > 10))
@@ -82,8 +100,10 @@ const getAllMovies = async (req, res) => {
       };
     }
 
+    // Fetch data from TMDB
     const { data } = await tmdb.get(endpoint, { params });
 
+    // Process results
     let results = data.results.map((m) => ({
       id: m.id,
       title: m.title,
@@ -107,12 +127,17 @@ const getAllMovies = async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
+    // Prepare response data
+    const responseData = {
       page: data.page,
       totalPages: data.total_pages,
       results,
-    });
+    };
+
+    // Cache the response
+    await setCachedData(cacheKey, responseData, CACHE_TTL.SEARCH);
+
+    res.json({ success: true, cached: false, ...responseData });
   } catch (err) {
     // 404 from TMDb (e.g. invalid genre ID)
     if (err.response?.status === 404) {

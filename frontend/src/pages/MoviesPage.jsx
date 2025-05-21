@@ -106,6 +106,7 @@ const MoviesPage = () => {
     fetchFilteredMovies();
     updateUrlWithFilters();
   }, [
+    location.search,
     debouncedSearchQuery,
     selectedGenre,
     yearRange,
