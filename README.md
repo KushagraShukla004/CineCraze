@@ -122,8 +122,12 @@ Deploy to services like Render or Railway with proper environment variables set.
 - Enable social features (reviews, ratings)
 - Expand testing coverage
 
+## Authur
+
+[Kushagra Shukla](https://github.com/KushagraShukla004)
+
 ## License
 
-MIT
+GNU
 
 ![Tests](https://github.com/yourusername/CineCraze/actions/workflows/tests.yml/badge.svg)
