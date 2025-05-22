@@ -4,6 +4,9 @@
 
 CineCraze is a comprehensive movie browsing web application that enables users to search, filter, and explore movies using the TMDB API. The application features user authentication, favorite movie management, and detailed movie information with performance optimizations and responsive design.
 
+## Live :
+[CineCraze](https://cine-craze-zeta.vercel.app/)
+
 ## Features
 
 - ✨ Modern UI/UX with responsive design and dark mode support
@@ -130,4 +133,4 @@ Deploy to services like Render or Railway with proper environment variables set.
 
 GNU
 
-![Tests](https://github.com/yourusername/CineCraze/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/KushagraShukla004/CineCraze/actions/workflows/tests.yml/badge.svg)
