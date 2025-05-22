@@ -1,58 +1,65 @@
-/* eslint-disable no-unused-vars */
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { motion } from "framer-motion";
 import { fetchTrendingMovies, fetchPopularMovies } from "@/redux/slices/moviesSlice";
-import HeroSection from "@/components/movies/HeroSection";
 import MovieSection from "@/components/movies/MovieSection";
+import HeroSection from "@/components/movies/HeroSection";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const { trendingMovies, popularMovies } = useSelector((state) => state.movies);
   const { favorites } = useSelector((state) => state.favorites);
+  const [isLoading, setIsLoading] = useState(true);
+  const isMobile = useIsMobile(); // Use the hook to detect mobile screens
 
   useEffect(() => {
-    dispatch(fetchTrendingMovies());
-    dispatch(fetchPopularMovies());
+    const loadData = async () => {
+      setIsLoading(true);
+      await Promise.all([
+        dispatch(fetchTrendingMovies()),
+        dispatch(fetchPopularMovies()),
+      ]);
+      setIsLoading(false);
+    };
+
+    loadData();
   }, [dispatch]);
 
-  // Show loading screen if both trending and popular are loading
-  if (trendingMovies.isLoading && popularMovies.isLoading) {
+  // Show loading screen while fetching initial data
+  if (isLoading && (!trendingMovies.results.length || !popularMovies.results.length)) {
     return <LoadingScreen />;
   }
 
-  // Get a featured movie for the hero section
-  const featuredMovie = trendingMovies.results[0] || null;
+  // Get featured movie for hero section (first trending movie)
+  const featuredMovie = trendingMovies.results[0];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen"
-    >
-      {/* Hero Section */}
-      <HeroSection movie={featuredMovie} />
+    <div className="min-h-screen bg-background">
+      {/* Hero Section - Only show on non-mobile screens */}
+      {!isMobile && featuredMovie && <HeroSection movie={featuredMovie} />}
 
-      {/* Trending Movies Section */}
-      <MovieSection
-        title="Trending Movies"
-        movies={trendingMovies.results}
-        isLoading={trendingMovies.isLoading}
-        viewAllLink="/movies?filter=trending"
-        favorites={favorites} // Changed from isFavorite to favorites
-      />
+      {/* Content Sections with proper spacing - Adjust top padding on mobile */}
+      <div className={`${isMobile ? "pt-4" : "py-2"} sm:py-4`}>
+        {/* Trending Movies Section */}
+        <MovieSection
+          title="Trending Now"
+          movies={trendingMovies.results}
+          isLoading={trendingMovies.isLoading}
+          viewAllLink="/movies?filter=trending"
+          favorites={favorites}
+        />
 
-      {/* Popular Movies Section */}
-      <MovieSection
-        title="Popular Movies"
-        movies={popularMovies.results}
-        isLoading={popularMovies.isLoading}
-        viewAllLink="/movies?sort=popularity.desc"
-        favorites={favorites}
-      />
-    </motion.div>
+        {/* Popular Movies Section */}
+        <MovieSection
+          title="Popular Movies"
+          movies={popularMovies.results}
+          isLoading={popularMovies.isLoading}
+          viewAllLink="/movies"
+          favorites={favorites}
+        />
+      </div>
+    </div>
   );
 };
 

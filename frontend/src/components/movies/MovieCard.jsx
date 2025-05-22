@@ -8,22 +8,15 @@ import { addFavorite, removeFavorite } from "@/redux/slices/favoritesSlice";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { transformMovieData } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile"; // Import the hook
 
 const MovieCard = ({ movie, isFavorite = false }) => {
   const dispatch = useDispatch();
   const { toast } = useToast();
   const { user } = useSelector((state) => state.auth);
-  const { genres } = useSelector((state) => state.genres);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
-  // Get genre names from genre IDs
-  const getGenreNames = (movieGenres) => {
-    if (!movieGenres || !genres?.length) return [];
-    return movieGenres
-      .map((id) => genres.find((g) => g.id === id)?.name)
-      .filter((name) => name);
-  };
+  const isMobile = useIsMobile(); // Use the hook to detect mobile screens
 
   const handleFavoriteToggle = (e) => {
     e.preventDefault();
@@ -68,16 +61,16 @@ const MovieCard = ({ movie, isFavorite = false }) => {
       transition={{ duration: 0.2 }}
     >
       <Link to={`/movies/${movie.id}`} className="block h-full">
-        {/* Poster Image with improved shadow and border */}
-        <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-muted shadow-lg border border-muted/30">
+        {/* Poster Image */}
+        <div className="relative aspect-[2/3] overflow-hidden rounded-lg bg-muted shadow-md">
           {!imageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-muted">
-              <div className="h-16 w-16 animate-pulse rounded-full bg-muted-foreground/20"></div>
+              <div className="h-8 w-8 animate-pulse rounded-full bg-muted-foreground/20"></div>
             </div>
           )}
 
           <img
-            src={movie.poster || `/placeholder.svg?height=450&width=300`}
+            src={movie.poster || `/placeholder.svg?height=300&width=200`}
             alt={movie.title}
             className={cn(
               "h-full w-full object-cover transition-opacity duration-300",
@@ -86,81 +79,68 @@ const MovieCard = ({ movie, isFavorite = false }) => {
             onLoad={() => setImageLoaded(true)}
           />
 
-          {/* Improved gradient overlay */}
+          {/* Overlay - Always show basic info on mobile */}
           <div
             className={cn(
-              "absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent transition-opacity duration-300",
-              isHovered ? "opacity-100" : "opacity-0 md:opacity-0"
+              "absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent transition-opacity duration-300",
+              isMobile ? "opacity-100" : isHovered ? "opacity-100" : "opacity-0"
             )}
           ></div>
 
-          {/* Content with improved typography */}
+          {/* Content - Always show title and rating on mobile */}
           <div
             className={cn(
-              "absolute bottom-0 w-full p-4 transform transition-all duration-300",
-              isHovered
+              "absolute bottom-0 w-full p-2 transform transition-all duration-300 sm:p-3",
+              isMobile
+                ? "opacity-100 translate-y-0"
+                : isHovered
                 ? "translate-y-0 opacity-100"
-                : "translate-y-2 opacity-0 md:opacity-0"
+                : "translate-y-2 opacity-0"
             )}
           >
-            <h3 className="mb-1 text-lg font-heading font-bold text-white line-clamp-2">
+            <h3 className="mb-1 text-sm font-bold text-white line-clamp-1 sm:text-base">
               {movie.title}
             </h3>
 
-            {/* Genre Tags with improved styling */}
-            {getGenreNames(movie.genres)?.length > 0 && (
-              <div className="mb-2 flex flex-wrap gap-1">
-                {getGenreNames(movie.genres)
-                  .slice(0, 2)
-                  .map((genre, index) => (
-                    <span
-                      key={index}
-                      className="inline-block rounded-full bg-primary/80 px-2 py-0.5 text-xs font-medium text-primary-foreground"
-                    >
-                      {genre}
-                    </span>
-                  ))}
-              </div>
-            )}
-
-            {/* Add truncated overview with improved font */}
-            {movie.overview && (
-              <p className="mb-2 line-clamp-2 text-sm font-sans text-white/90">
-                {movie.overview}
-              </p>
-            )}
-
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1 text-white/90">
-                  <Calendar size={14} />
-                  <span className="text-xs font-medium">{movie.releaseYear}</span>
-                </div>
-
+              <div className="flex items-center gap-1">
                 <div
                   className={cn(
-                    "movie-rating rounded-full px-1.5 py-0.5",
+                    "flex items-center gap-0.5 rounded-full px-1 py-0.5",
                     getRatingColor(movie.rating)
                   )}
                 >
-                  <Star size={14} className="fill-current" />
-                  <span className="font-medium">{movie.rating.toFixed(1)}</span>
+                  <Star size={10} className="fill-current sm:h-3 sm:w-3" />
+                  <span className="text-[10px] font-medium sm:text-xs">
+                    {movie.rating.toFixed(1)}
+                  </span>
                 </div>
+
+                {isMobile && (
+                  <div className="flex items-center gap-0.5 text-white/80 ml-1">
+                    <Calendar size={10} className="sm:h-3 sm:w-3" />
+                    <span className="text-[10px] font-medium sm:text-xs">
+                      {movie.releaseYear}
+                    </span>
+                  </div>
+                )}
               </div>
 
-              {/* Favorite Button with improved styling */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={handleFavoriteToggle}
                 className={cn(
-                  "rounded-full p-1.5 shadow-md",
+                  "rounded-full p-1",
                   isFavorite
                     ? "bg-primary text-primary-foreground"
                     : "bg-white/30 text-white hover:bg-white/40"
                 )}
               >
-                <Heart size={16} className={isFavorite ? "fill-current" : ""} />
+                <Heart
+                  size={12}
+                  className={isFavorite ? "fill-current sm:h-3 sm:w-3" : "sm:h-3 sm:w-3"}
+                />
               </motion.button>
             </div>
           </div>
